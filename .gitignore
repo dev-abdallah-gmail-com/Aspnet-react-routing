@@ -28,3 +28,8 @@ npm-debug.log*
 .env
 .env.local
 .env.*.local
+
+# Publish output (generated files)
+publish/backend/app/
+publish/frontend/app/
+publish/zip/

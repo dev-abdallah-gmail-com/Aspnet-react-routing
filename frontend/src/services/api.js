@@ -1,11 +1,12 @@
 import axios from 'axios';
+import config from '../config';
 
 /**
  * إعداد Axios للاتصال بالـ API
  * Configure Axios for API communication
  */
 
-const API_BASE_URL = 'http://localhost:5000/api';
+const API_BASE_URL = config.API_BASE_URL;
 
 // إنشاء instance من Axios
 const api = axios.create({
