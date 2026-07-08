@@ -40,7 +40,18 @@ export default function PhotoCapture({ personIndex }: Props) {
       const { base64, mediaType } = await fileToBase64(file);
       const res = await analyzeOcr(base64, mediaType, persons[personIndex]);
       applyExtraction(personIndex, res.fields, "ocr", res.rawText);
-      setStatus("تم التعرّف على المستند وتعبئة الحقول.");
+      if (res.error) {
+        setStatus(`⚠️ ${res.error}`);
+      } else {
+        const filled = Object.values(res.fields).filter(
+          (v) => v && v.trim(),
+        ).length;
+        setStatus(
+          filled > 0
+            ? `تم التعرّف على المستند وتعبئة ${filled} حقل.`
+            : "تم التعرّف لكن لم يُستخرج أي حقل من الصورة.",
+        );
+      }
     } catch (err) {
       setStatus(`خطأ: ${(err as Error).message}`);
     } finally {

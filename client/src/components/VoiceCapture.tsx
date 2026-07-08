@@ -20,7 +20,18 @@ export default function VoiceCapture({ personIndex }: Props) {
       const res = await analyzeVoice(text, persons[personIndex]);
       // النص الخام = ما نطقه المستخدم؛ الحقول = ما استخرجه الذكاء الصناعي
       applyExtraction(personIndex, res.fields, "voice", res.rawText || text);
-      setStatus("تم تحليل الكلام وتعبئة الحقول.");
+      if (res.error) {
+        setStatus(`⚠️ ${res.error}`);
+      } else {
+        const filled = Object.values(res.fields).filter(
+          (v) => v && v.trim(),
+        ).length;
+        setStatus(
+          filled > 0
+            ? `تم تعبئة ${filled} حقل من الكلام.`
+            : "لم يُستخرج أي حقل من الكلام.",
+        );
+      }
     } catch (e) {
       setStatus(`خطأ: ${(e as Error).message}`);
     } finally {
