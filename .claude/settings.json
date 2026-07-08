@@ -1,0 +1,14 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if ! command -v dotnet >/dev/null 2>&1 && [ ! -x /usr/share/dotnet/dotnet ]; then apt-get update -y >/dev/null 2>&1 && apt-get install -y dotnet-sdk-8.0 >/dev/null 2>&1; fi; echo 'dotnet:' $(PATH=\"$PATH:/usr/share/dotnet\" dotnet --version 2>/dev/null || echo missing)"
+          }
+        ]
+      }
+    ]
+  }
+}

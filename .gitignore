@@ -1,0 +1,26 @@
+# .NET
+bin/
+obj/
+*.user
+
+# SQLite
+*.db
+*.db-shm
+*.db-wal
+
+# Node / Vite
+node_modules/
+dist/
+*.tsbuildinfo
+client/vite.config.js
+client/vite.config.d.ts
+
+# Logs & env
+*.log
+.env
+.env.local
+
+# OS/editor
+.DS_Store
+.vs/
+.vscode/
